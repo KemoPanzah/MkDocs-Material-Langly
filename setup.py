@@ -15,6 +15,7 @@ setup(
     install_requires=[
         'mkdocs>=1.0.4',
         'mkdocs-material>=9.5.41'
+        'deepl>=1.19.1'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
