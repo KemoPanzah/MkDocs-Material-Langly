@@ -1,4 +1,3 @@
-from polib import pofile
 import json
 from deepl import Translator
 from pathlib import Path
