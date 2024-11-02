@@ -16,7 +16,6 @@ class Langly(BasePlugin):
     config_scheme = (
         ('source', config_options.Type(dict, required=True )),
         ('targets', config_options.Type(list, default=[])),
-        ('service', config_options.Type(str, default='manual')),
         ('delimiter', config_options.Type(str, default='[[,]]')),
     )
 
