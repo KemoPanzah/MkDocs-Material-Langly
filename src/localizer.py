@@ -49,7 +49,7 @@ class DeepL(Translator):
     #         return t_glossary
      
     def translate(self, p_text, p_target_lang):
-        return self.translate_text(p_text, target_lang=p_target_lang, tag_handling='html', ignore_tags='code').text
+        return self.translate_text(p_text, target_lang=p_target_lang, tag_handling='html', ignore_tags=['code']).text
 
 class Localizer:
     def __init__(self, p_src_path, p_source_lang, p_target_lang):
