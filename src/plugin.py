@@ -7,7 +7,9 @@ from mkdocs.utils import log
 from mkdocs.config import config_options
 from mkdocs.plugins import BasePlugin
 from mkdocs.config.defaults import MkDocsConfig
+from markdown import markdown as md2html
 from pathlib import Path
+from markdownify import MarkdownConverter
 
 from .localizer import Localizer
 
@@ -28,7 +30,7 @@ class Langly(BasePlugin):
     config_scheme = (
         ('source', config_options.Type(dict, required=True )),
         ('targets', config_options.Type(list, default=[])),
-        ('delimiter', config_options.Type(str, default='[[,]]')),
+        # ('delimiter', config_options.Type(str, default='[[,]]')),
     )
 
     def __init__(self):
@@ -89,16 +91,24 @@ class Langly(BasePlugin):
 
         return config
 
-    def generate(self, src_path, markdown):
+    def generate(self, src_path, p_content, p_type='html'):
         t_content_pattern = re.compile(r'\[\[\s*(.*?)\s*\]\]')
-        t_content_match = t_content_pattern.finditer(markdown)
-        t_content_found_s = t_content_pattern.findall(markdown)
+        t_content_match = t_content_pattern.finditer(p_content)
+        t_content_found_s = t_content_pattern.findall(p_content)
         if t_content_found_s:   
             t_localizer = Localizer(src_path, self.source_lang, self.target_lang)
+            t_html2md = MarkdownConverter()
             for match in t_content_match:
-                markdown = markdown.replace(match.group(0), t_localizer.translate(self.serve, match.group(1)))
+                t_text = match.group(1)
+                if p_type == 'markdown':
+                    t_text = md2html(t_text).replace('<p>', '').replace('</p>', '')
+                    t_text = t_localizer.translate(self.serve, t_text)
+                    t_text = t_html2md.convert(t_text)
+                if p_type == 'html':
+                    t_text = t_localizer.translate(self.serve, t_text)
+                p_content = p_content.replace(match.group(0), t_text)
             t_localizer.save_data()
-        return markdown
+        return p_content
     
     def create_index(self, p_source_lang):
         t_template = Template(index)
@@ -115,10 +125,11 @@ class Langly(BasePlugin):
         return self.configure(config)
     
     def on_page_markdown(self, markdown, page, config, files):
-        markdown = self.generate(page.file.src_path, markdown)
+        markdown = self.generate(page.file.src_path, markdown, 'markdown')
         return markdown
     
     def on_page_content(self, html, page, config, files):
+        # html = self.generate(page.file.src_path, html)
         return html
 
     def on_post_build(self, config):   

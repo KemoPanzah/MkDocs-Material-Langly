@@ -14,7 +14,8 @@ setup(
     python_requires='>=2.7',
     install_requires=[
         'mkdocs>=1.0.4',
-        'mkdocs-material>=9.5.41'
+        'mkdocs-material>=9.5.41',
+        'markdownify>=0.13.1',
         'deepl>=1.19.1'
     ],
     classifiers=[
