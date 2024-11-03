@@ -45,6 +45,8 @@ class Langly(BasePlugin):
         self.target_lang_s = []
         self.source_lang = None
         self.target_lang = None
+
+        self.localizer = None
         
 
     def configure(self, config: MkDocsConfig):
@@ -91,23 +93,21 @@ class Langly(BasePlugin):
 
         return config
 
-    def generate(self, src_path, p_content, p_type='html'):
+    def generate(self, p_content, p_type='html'):
         t_content_pattern = re.compile(r'\[\[\s*(.*?)\s*\]\]')
         t_content_match = t_content_pattern.finditer(p_content)
         t_content_found_s = t_content_pattern.findall(p_content)
         if t_content_found_s:   
-            t_localizer = Localizer(src_path, self.source_lang, self.target_lang)
             t_html2md = MarkdownConverter()
             for match in t_content_match:
                 t_text = match.group(1)
                 if p_type == 'markdown':
                     t_text = md2html(t_text).replace('<p>', '').replace('</p>', '')
-                    t_text = t_localizer.translate(self.serve, t_text)
+                    t_text = self.localizer.translate(self.serve, t_text)
                     t_text = t_html2md.convert(t_text)
                 if p_type == 'html':
-                    t_text = t_localizer.translate(self.serve, t_text)
+                    t_text = self.localizer.translate(self.serve, t_text)
                 p_content = p_content.replace(match.group(0), t_text)
-            t_localizer.save_data()
         return p_content
     
     def create_index(self, p_source_lang):
@@ -124,12 +124,17 @@ class Langly(BasePlugin):
     def on_config(self, config):
         return self.configure(config)
     
+    def on_pre_page(self, page, config, files):
+        self.localizer = Localizer(page.file.src_path, self.source_lang, self.target_lang)
+        return page
+
     def on_page_markdown(self, markdown, page, config, files):
-        markdown = self.generate(page.file.src_path, markdown, 'markdown')
+        markdown = self.generate(markdown, 'markdown')
         return markdown
     
     def on_page_content(self, html, page, config, files):
-        # html = self.generate(page.file.src_path, html)
+        html = self.generate(html, 'html')
+        self.localizer.save_data()
         return html
 
     def on_post_build(self, config):   
