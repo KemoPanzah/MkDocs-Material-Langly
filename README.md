@@ -6,6 +6,7 @@ A MkDocs plugin that does something.
 
 ### 0.1.0 - Initial Release
   
+- Insert an `index.html` with redirect to the source language.
 - Configure MKDocs and the Material Theme for each build in the respective language.
 - Set all open translations to draft mode during serve mode to minimize access to the translation API.
 - Also search the page content to find additional translations created with third-party plugins such as mkdocs-strings.

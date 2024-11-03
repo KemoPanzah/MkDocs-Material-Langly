@@ -109,4 +109,4 @@ class Localizer:
                     self.__data__[p_text][self.target_lang] = self.deepl.translate(p_text, self.target_lang)
                     return self.__data__[p_text][self.target_lang]
                 else:
-                    return "## Draft mode active during serve. Please run serve again or build. ##"
+                    return "##DRAFT-MODE##"

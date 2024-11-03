@@ -20,7 +20,7 @@ index = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0; url=/{{ source_lang }}/">
+    <meta http-equiv="refresh" content="0; url={{ source_lang }}/">
 </head>
 </html>
 """
