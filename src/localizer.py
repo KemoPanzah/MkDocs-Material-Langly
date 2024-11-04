@@ -2,6 +2,7 @@ import json, re
 from deepl import Translator
 from pathlib import Path
 from mkdocs.utils import log
+from bs4 import BeautifulSoup
 
 # entries = {
 #     'en-us': {
@@ -47,21 +48,34 @@ class DeepL(Translator):
     #             )
 
     #         return t_glossary
-     
-    def translate(self, p_text, p_target_lang):
-        p_text = self.add_no_translate(p_text)
-        p_text = self.translate_text(p_text, target_lang=p_target_lang, tag_handling='html').text
-        p_text = self.remove_no_translate(p_text)
-        return p_text
 
-    def add_no_translate(self, p_text):
-        # Markiere den Inhalt innerhalb von <code> Tags mit {{NO_TRANSLATE}}
-        p_text = re.sub(r'<code>(.*?)</code>', r'{{CODE:\1}}', p_text)
-        return p_text
+    # def add_tag_ids(self, p_text):
+    #     p_text = re.sub(r'<code>(.*?)</code>', r'<code id="\1">\1</code>', p_text)
+    #     return p_text
+    
+    # def remove_tag_ids(self, p_text):
+    #     p_text = re.sub(r'<code id="(.*?)">(.*?)</code>', r'<code>\1</code>', p_text)
+    #     return p_text
 
-    def remove_no_translate(self, p_text):
-        # Entferne die {{NO_TRANSLATE}} Markierungen innerhalb von <code> Tags
-        p_text = re.sub(r'{{CODE:(.*?)}}', r'<code>\1</code>', p_text)
+    def add_tag_attr(self, p_text):
+        soup = BeautifulSoup(p_text, 'html.parser')
+        for code_tag in soup.find_all('code'):
+            code_content = code_tag.string
+            code_tag['fixed-text'] = code_content
+        return str(soup)
+    
+    def remove_tag_attr(self, p_text):
+        soup = BeautifulSoup(p_text, 'html.parser')
+        for code_tag in soup.find_all('code'):
+            if code_tag.has_attr('fixed-text'):
+                code_tag.string = code_tag['fixed-text']
+                del code_tag['fixed-text']
+        return str(soup)
+
+    def translate(self, p_text, p_source_lang, p_target_lang):
+        p_text = self.add_tag_attr(p_text)
+        p_text = self.translate_text(p_text, source_lang=p_source_lang, target_lang=p_target_lang, preserve_formatting=True, tag_handling='html').text
+        p_text = self.remove_tag_attr(p_text)
         return p_text
 
 class Localizer:
@@ -119,7 +133,7 @@ class Localizer:
             else:
                 if not serve:
                     log.info(f'Translating: {p_text} to {self.target_lang}')
-                    self.__data__[p_text][self.target_lang] = self.deepl.translate(p_text, self.target_lang)
+                    self.__data__[p_text][self.target_lang] = self.deepl.translate(p_text, self.source_lang, self.target_lang)
                     return self.__data__[p_text][self.target_lang]
                 else:
                     return "##DRAFT-MODE##"
