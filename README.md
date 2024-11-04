@@ -12,4 +12,4 @@ A MkDocs plugin that does something.
 - Also search the page content to find additional translations created with third-party plugins such as mkdocs-strings.
 - Save all translations in one JSON file per page to minimize access to the translation api and enable manual changes.
 - Converts Markdown to HTML, translates and converts back to get text formatting like `code`, `strong` and `em`.
-- Temporary definition of notranslate classes to get code tags.
+- Preliminary definition of notranslate placeholders to get code tags.

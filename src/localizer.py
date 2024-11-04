@@ -55,11 +55,13 @@ class DeepL(Translator):
         return p_text
 
     def add_no_translate(self, p_text):
-        p_text = re.sub(r'<code>(.*?)</code>', r'<code class="notranslate">\1</code>', p_text)
+        # Markiere den Inhalt innerhalb von <code> Tags mit {{NO_TRANSLATE}}
+        p_text = re.sub(r'<code>(.*?)</code>', r'{{CODE:\1}}', p_text)
         return p_text
 
     def remove_no_translate(self, p_text):
-        p_text = re.sub(r'<code class="notranslate">(.*?)</code>', r'<code>\1</code>', p_text)
+        # Entferne die {{NO_TRANSLATE}} Markierungen innerhalb von <code> Tags
+        p_text = re.sub(r'{{CODE:(.*?)}}', r'<code>\1</code>', p_text)
         return p_text
 
 class Localizer:
