@@ -1,4 +1,4 @@
-import json
+import json, re
 from deepl import Translator
 from pathlib import Path
 from mkdocs.utils import log
@@ -49,7 +49,18 @@ class DeepL(Translator):
     #         return t_glossary
      
     def translate(self, p_text, p_target_lang):
-        return self.translate_text(p_text, target_lang=p_target_lang, tag_handling='html', ignore_tags=['code']).text
+        p_text = self.add_no_translate(p_text)
+        p_text = self.translate_text(p_text, target_lang=p_target_lang, tag_handling='html').text
+        p_text = self.remove_no_translate(p_text)
+        return p_text
+
+    def add_no_translate(self, p_text):
+        p_text = re.sub(r'<code>(.*?)</code>', r'<code class="notranslate">\1</code>', p_text)
+        return p_text
+
+    def remove_no_translate(self, p_text):
+        p_text = re.sub(r'<code class="notranslate">(.*?)</code>', r'<code>\1</code>', p_text)
+        return p_text
 
 class Localizer:
     def __init__(self, p_src_path, p_source_lang, p_target_lang):
