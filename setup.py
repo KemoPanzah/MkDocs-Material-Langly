@@ -11,11 +11,12 @@ setup(
     author='Jean Rohark',
     author_email='no@mail',
     license='MIT',
-    python_requires='>=2.7',
+    python_requires='>=3.11.4',
     install_requires=[
         'mkdocs>=1.0.4',
         'mkdocs-material>=9.5.41',
         'markdownify>=0.13.1',
+        'beautifulsoup4>=4.12.3',
         'deepl>=1.19.1'
     ],
     classifiers=[
