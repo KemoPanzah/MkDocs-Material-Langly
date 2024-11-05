@@ -31,6 +31,7 @@ class Langly(BasePlugin):
         ('source', config_options.Type(dict, required=True )),
         ('targets', config_options.Type(list, default=[])),
         # ('delimiter', config_options.Type(str, default='[[,]]')),
+        ('lang_switch', config_options.Type(bool, default=True)),
     )
 
     def __init__(self):
@@ -85,6 +86,14 @@ class Langly(BasePlugin):
 
         # Configure material theme
         config.theme['language'] = self.target_lang[:2]
+
+        if self.config['lang_switch']:
+            config.extra['alternate'] = []
+            t_lang = {'name': self.config['source']['name'], 'lang': self.config['source']['lang'][:2], 'link': f'../{self.config["source"]["lang"][:2]}/'}
+            config.extra['alternate'].append(t_lang)
+            for target in self.config.data['targets']:
+                t_lang = {'name': target['name'], 'lang': target['lang'][:2], 'link': f'../{target["lang"][:2]}/'}
+                config.extra['alternate'].append(t_lang)
 
         t_blog = config.plugins.get('material/blog')
         
