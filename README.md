@@ -2,11 +2,15 @@
 
 A MkDocs plugin that does something.
 
+## Work in Progress
+
+- Navigation translation
+
 ## Changelog and Features
 
 ### 0.1.0 - Initial Release
   
-- Insert an `index.html` with redirect to the source language.
+- Insert an "index.html" with redirection to the target language by browser language.
 - Configure MKDocs and the Material Theme for each build in the respective language.
 - Optional language switch that is configured automatically.
 - Set all open translations to draft mode during serve mode to minimize access to the translation API.
