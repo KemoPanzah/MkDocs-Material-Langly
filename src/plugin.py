@@ -3,6 +3,8 @@ import shutil
 
 from jinja2 import Template
 from mkdocs.commands.build import build
+from mkdocs.structure.files import Files
+from mkdocs.structure.nav import Navigation
 from mkdocs.utils import log
 from mkdocs.config import config_options
 from mkdocs.plugins import BasePlugin
@@ -133,6 +135,14 @@ class Langly(BasePlugin):
 
     def on_config(self, config):
         return self.configure(config)
+    
+    def on_nav(self, nav, config, files):
+        self.localizer = Localizer('nav.md', self.source_lang, self.target_lang)
+        for item in nav.items:
+            if item.title:
+                item.title = self.generate(item.title, 'html')
+        self.localizer.save_data()
+        return nav
     
     def on_pre_page(self, page, config, files):
         self.localizer = Localizer(page.file.src_path, self.source_lang, self.target_lang)

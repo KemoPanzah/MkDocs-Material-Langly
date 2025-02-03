@@ -4,7 +4,7 @@ A MkDocs plugin that does something.
 
 ## Work in Progress
 
-- Navigation translation
+
 
 ## Changelog and Features
 
@@ -18,3 +18,4 @@ A MkDocs plugin that does something.
 - Save all translations in one JSON file per page to minimize access to the translation api and enable manual changes.
 - Converts Markdown to HTML, translates and converts back to get text formatting like `code`, `strong` and `em`.
 - Get fixed words in code tags with temporary HTML attributes.
+- Navigation translation
