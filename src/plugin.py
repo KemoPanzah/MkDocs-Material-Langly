@@ -42,8 +42,9 @@ class Langly(BasePlugin):
         self.init = False
         self.serve = False
         
-        self.site_url = None
+        self.docs_dir = None
         self.site_dir = None
+        self.site_url = None
         self.language_s = []
 
         self.target_lang_s = []
@@ -61,15 +62,17 @@ class Langly(BasePlugin):
 
         # Save root values on first run
         if not self.init:
-       
-            self.site_url = config.site_url
+            
+            self.docs_dir = config.docs_dir
             self.site_dir = config.site_dir
+            self.site_url = config.site_url
 
             self.language_s.append(self.config['source']['lang'])
             for target in self.config['targets']:
                 self.language_s.append(target['lang'])
 
             self.create_index(self.config['source']['lang'])
+            self.copy_cname()
         
             self.init = True
 
@@ -129,6 +132,13 @@ class Langly(BasePlugin):
         t_index_path.parent.mkdir(parents=True, exist_ok=True)
         with open(Path(self.site_dir).joinpath('index.html'), 'w') as f:
             f.write(t_index)
+
+    def copy_cname(self):
+        t_cname_path = Path(self.docs_dir).joinpath('CNAME')
+        if t_cname_path.is_file():
+            shutil.copy(t_cname_path, self.site_dir)
+        else:
+            log.info('No CNAME file found in docs.')
 
     def on_startup(self, command, dirty):
         pass
