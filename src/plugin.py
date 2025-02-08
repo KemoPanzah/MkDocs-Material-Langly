@@ -109,7 +109,7 @@ class Langly(BasePlugin):
         return config
 
     def generate(self, p_content, p_type='html'):
-        t_content_pattern = re.compile(r'\[\[\s*(.*?)\s*\]\]')
+        t_content_pattern = re.compile(r'(?<!`)(?<!<code>)\[\[\s*(.*?)\s*\]\](?!</code>)(?!`)')
         t_content_match = t_content_pattern.finditer(p_content)
         t_content_found_s = t_content_pattern.findall(p_content)
         if t_content_found_s:   

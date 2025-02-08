@@ -4,6 +4,8 @@ A MkDocs plugin that does something.
 
 ## Work in Progress
 
+- Ignore delimiters (e.g. `[[` & `]]` ) within a masking.
+
 ## Changelog and Features
 
 ### 0.1.0 - Initial Release
