@@ -4,7 +4,7 @@ A MkDocs plugin that does something.
 
 ## Work in Progress
 
-- Ignore delimiters (e.g. `[[` & `]]` ) within a masking.
+
 
 ## Changelog and Features
 
@@ -20,3 +20,4 @@ A MkDocs plugin that does something.
 - Get fixed words in code tags with temporary HTML attributes.
 - Navigation translation
 - Copy the CNAME file required for gh-deploy into the root directory of the build.
+- Ignore delimiters (e.g. `[[` & `]]` ) within a masking.
