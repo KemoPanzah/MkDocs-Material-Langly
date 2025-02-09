@@ -4,8 +4,6 @@ A MkDocs plugin that does something.
 
 ## Work in Progress
 
-
-
 ## Changelog and Features
 
 ### 0.1.0 - Initial Release
