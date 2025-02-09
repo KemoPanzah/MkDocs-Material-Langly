@@ -68,5 +68,3 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
-          # VORLÄUFIGE KOFIGURATION WEIL GERADE ETWAS NICHT FUNKTIONIERT
-          password: ${{ secrets.MAIN_TOKEN }}

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='mkdocs_material_langly',
+    name='mkdocs-material-langly',
     version='0.1.0',
     description='A language tool for MkDocs Material theme',
     long_description='A language tool for MkDocs Material theme',
