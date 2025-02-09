@@ -9,7 +9,7 @@ setup(
     keywords='mkdocs, material, language, translation',
     url='https://www.decore.dev/en/sub/mkdocs_material_langly/',
     author='Kemo Panzah',
-    author_email='no@mail',
+    author_email='no@mail.com',
     license='MIT',
     python_requires='>=3.11.4',
     install_requires=[
