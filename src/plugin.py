@@ -34,7 +34,6 @@ class Langly(BasePlugin):
         ('targets', config_options.Type(list, default=[])),
         # ('delimiter', config_options.Type(str, default='[[,]]')),
         ('lang_switch', config_options.Type(bool, default=True)),
-        ('mode', config_options.Type(str, default='manual')),
     )
 
     def __init__(self):
