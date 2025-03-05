@@ -1,4 +1,4 @@
-# MKDocs Material Langly Plugin
+# MkDocs Material Langly Plugin
 
 A MkDocs plugin that does something.
 
