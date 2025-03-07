@@ -108,7 +108,8 @@ class Langly(BasePlugin):
         return config
 
     def generate(self, p_content, p_type='html'):
-        t_content_pattern = re.compile(r'(?<!`)(?<!<code>)\[\[\s*(.*?)\s*\]\](?!</code>)(?!`)')
+        t_content_pattern = re.compile(r'\[\[\s*(.*?)\s*\]\]')
+        # t_content_pattern = re.compile(r'(?<!`)(?<!<code>)\[\[\s*(.*?)\s*\]\](?!</code>)(?!`)')
         t_content_match = t_content_pattern.finditer(p_content)
         t_content_found_s = t_content_pattern.findall(p_content)
         if t_content_found_s:   
@@ -124,6 +125,11 @@ class Langly(BasePlugin):
                 p_content = p_content.replace(match.group(0), t_text)
         return p_content
     
+    def finalize(self, p_content):
+        # Ersetzte alle vorkommen von {[{ und }]} durch [[ und ]]
+        p_content = p_content.replace('{[{', '[[').replace('}]}', ']]')
+        return p_content
+
     def create_index(self, p_source_lang):
         t_template = Template(index)
         t_index = t_template.render(source_lang=p_source_lang)
@@ -164,6 +170,7 @@ class Langly(BasePlugin):
     def on_page_content(self, html, page, config, files):
         html = self.generate(html, 'html')
         self.localizer.save_data()
+        html = self.finalize(html)
         return html
 
     def on_post_build(self, config):   
