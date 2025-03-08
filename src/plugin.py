@@ -127,7 +127,7 @@ class Langly(BasePlugin):
     
     def finalize(self, p_content):
         # Ersetzte alle vorkommen von {[{ und }]} durch [[ und ]]
-        p_content = p_content.replace('{[{', '[[').replace('}]}', ']]')
+        p_content = p_content.replace('{[', '[[').replace(']}', ']]')
         return p_content
 
     def create_index(self, p_source_lang):
