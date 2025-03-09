@@ -1,10 +1,16 @@
 from setuptools import setup, find_packages
+from pathlib import Path
+
+# Read the contents of your README file
+t_root = Path(__file__).parent
+long_description = (t_root / "README.md").read_text()
 
 setup(
     name='mkdocs-material-langly',
     version='0.1.3',
     description='A language tool for MkDocs Material theme',
-    long_description='A language tool for MkDocs Material theme',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     keywords='mkdocs, material, language, translation, multilanguage, multilingual, deepl',
     url='https://www.decore.dev/en/sub/mkdocs_material_langly/',
     author='Kemo Panzah',
