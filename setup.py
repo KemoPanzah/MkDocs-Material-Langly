@@ -1,18 +1,10 @@
 from setuptools import setup, find_packages
-from pathlib import Path
-
-# t_root = Path(__file__).parent
-# t_readme = Path(t_root).joinpath('README.md')
-
-# with open(t_readme, 'rb') as f:
-#   long_description = f.read()
 
 setup(
     name='mkdocs-material-langly',
     version='0.1.2',
-    description='The Langly plugin for MkDocs is a plugin that provides language support and translations for websites created with MkDocs using the Material theme.',
-    long_description='long_description',
-    long_description_content_type='text/markdown',
+    description='A language tool for MkDocs Material theme',
+    long_description='A language tool for MkDocs Material theme',
     keywords='mkdocs, material, language, translation, multi-language, multi-lingual, deepl',
     url='https://www.decore.dev/en/sub/mkdocs_material_langly/',
     author='Kemo Panzah',
