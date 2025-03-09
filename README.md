@@ -15,7 +15,7 @@ This list includes plugins that were used directly in the development of Langly 
 - [mkdocs-strings](https://mkdocstrings.github.io){:target="_blank"}
 - [mkdocs-glightbox](https://github.com/blueswen/mkdocs-glightbox){:target="_blank"}
 
-<!-- Abastz für inkludierte Plugins mit Danksagung -->
+<!-- Abastz fï¿½r inkludierte Plugins mit Danksagung -->
 
 These great plugins definitely need full support and recognition.
 
@@ -88,7 +88,7 @@ plugins:
 
 In this configuration, German is set as the source language and English as the target language. You can add as many target languages as you like. However, this will affect the `serve` performance all the more. The `site_url` option should correspond to the publication address of your website so that the `sitemap` and `canonicals` function correctly.
 
-!!! warning
+[!warning]
     It is important to use the Deepl language codes for `source` and `target`. These can be found on the following website: [Deepl Language Codes](https://developers.deepl.com/docs/resources/supported-languages){:target="_blank"}
 
 Once you have made the configuration, you can use the translation functions in your Markdown files.
