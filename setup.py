@@ -2,7 +2,10 @@ from setuptools import setup, find_packages
 from pathlib import Path
 
 t_root = Path(__file__).parent
-long_description = (t_root / "README.md").read_text()
+t_readme = Path(t_root).joinpath('README.md')
+
+with open(t_readme, 'rb') as f:
+  long_description = f.read()
 
 setup(
     name='mkdocs-material-langly',
