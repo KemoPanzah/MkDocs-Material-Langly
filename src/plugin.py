@@ -32,6 +32,7 @@ class Langly(BasePlugin):
     config_scheme = (
         ('source', config_options.Type(dict, required=True )),
         ('targets', config_options.Type(list, default=[])),
+        ('export', config_options.Type(list, default=[])),
         # ('delimiter', config_options.Type(str, default='[[,]]')),
         ('lang_switch', config_options.Type(bool, default=True)),
     )
@@ -126,9 +127,21 @@ class Langly(BasePlugin):
         return p_content
     
     def finalize(self, p_content):
-        # Ersetzte alle vorkommen von {[{ und }]} durch [[ und ]]
         p_content = p_content.replace('{[', '[[').replace(']}', ']]')
         return p_content
+    
+    def export(self, p_page, p_markdown, p_lang):
+        for export in self.config['export']:
+            if not self.serve and export['page'] == p_page.file.src_uri and export['lang'] == p_lang:
+                try:
+                    t_export_path = Path().joinpath(export['path'])
+                    t_export_path.parent.mkdir(parents=True, exist_ok=True)
+                    with open(t_export_path, 'w') as f:
+                        f.write(p_markdown)
+                except Exception as e:
+                    log.error(f'Error exporting {p_page.file.src_uri} to {t_export_path.resolve()}: {e}')
+                else:
+                    log.info(f'Exported {p_page.file.src_uri} to {t_export_path.resolve()}')
 
     def create_index(self, p_source_lang):
         t_template = Template(index)
@@ -165,6 +178,7 @@ class Langly(BasePlugin):
 
     def on_page_markdown(self, markdown, page, config, files):
         markdown = self.generate(markdown, 'markdown')
+        self.export(page, markdown, self.target_lang)
         return markdown
     
     def on_page_content(self, html, page, config, files):

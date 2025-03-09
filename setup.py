@@ -1,11 +1,15 @@
 from setuptools import setup, find_packages
+from pathlib import Path
 
+t_root = Path(__file__).parent
+long_description = (t_root / "README.md").read_text(encoding='utf-8')
 
 setup(
     name='mkdocs-material-langly',
     version='0.1.2',
-    description='A language tool for MkDocs Material theme',
-    long_description='A language tool for MkDocs Material theme',
+    description='The Langly plugin for MkDocs is a plugin that provides language support and translations for websites created with MkDocs using the Material theme. It enables easy management of multilingual content and automatic translation of texts to reach a wider audience. It deliberately does not comply with any of the current translation standards, but takes a completely unique but open approach.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     keywords='mkdocs, material, language, translation, multi-language, multi-lingual, deepl',
     url='https://www.decore.dev/en/sub/mkdocs_material_langly/',
     author='Kemo Panzah',
