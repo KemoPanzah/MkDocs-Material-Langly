@@ -39,7 +39,7 @@ jobs:
           path: dist/
 
   pypi-publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - release-build
     permissions:
