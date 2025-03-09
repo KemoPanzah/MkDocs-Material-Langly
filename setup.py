@@ -5,7 +5,7 @@ setup(
     version='0.1.2',
     description='A language tool for MkDocs Material theme',
     long_description='A language tool for MkDocs Material theme',
-    keywords='mkdocs, material, language, translation, multi-language, multi-lingual, deepl',
+    keywords='mkdocs, material, language, translation, multilanguage, multilingual, deepl',
     url='https://www.decore.dev/en/sub/mkdocs_material_langly/',
     author='Kemo Panzah',
     author_email='info@decore.dev',
