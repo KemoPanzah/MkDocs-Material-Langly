@@ -15,7 +15,7 @@ This list includes plugins that were used directly in the development of Langly 
 - [mkdocs-strings](https://mkdocstrings.github.io){:target="_blank"}
 - [mkdocs-glightbox](https://github.com/blueswen/mkdocs-glightbox){:target="_blank"}
 
-<!-- Abastz für inkludierte Plugins mit Danksagung -->
+<!-- Abastz fï¿½r inkludierte Plugins mit Danksagung -->
 
 These great plugins definitely need full support and recognition.
 
