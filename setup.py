@@ -7,7 +7,7 @@ long_description = (t_root / "README.md").read_text()
 
 setup(
     name='mkdocs-material-langly',
-    version='0.1.4',
+    version='0.1.2',
     description='A language tool for MkDocs Material theme',
     long_description=long_description,
     long_description_content_type='text/markdown',
