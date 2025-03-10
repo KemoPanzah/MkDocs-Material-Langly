@@ -6,6 +6,8 @@ This plugin was created to use the great Material theme and offers functionaliti
 
 **The only translation engine currently available is Deepl and a DeepL api key is required to use the plugin.**
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P2JCC5B)
+
 ## Directly supported plugins for mkdocs ##
 
 This list includes plugins that were used directly in the development of Langly and are considered compatible.
