@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mkdocs-material-langly"
+version = "0.1.2"
+description = "A language tool for MkDocs Material theme"
+readme = { file = "README.md", content-type = "text/markdown" }
+keywords = ["mkdocs", "material", "language", "translation", "multilanguage", "multilingual", "deepl"]
+homepage = "https://www.decore.dev/en/sub/mkdocs_material_langly/"
+authors = [
+    { name = "Kemo Panzah", email = "info@decore.dev" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.11.4"
+dependencies = [
+    "mkdocs>=1.0.4",
+    "mkdocs-material>=9.5.41",
+    "markdownify>=0.13.1",
+    "beautifulsoup4>=4.12.3",
+    "deepl>=1.19.1"
+]
+
+[project.urls]
+Documentation = "https://www.decore.dev/en/sub/mkdocs_material_langly/"
+Repository = "https://github.com/KemoPanzah/MkDocs-Material-Langly"
+Issues = "https://github.com/KemoPanzah/MkDocs-Material-Langly/issues"
+
+[project.classifiers]
+Development_Status = "4 - Beta"
+Intended_Audience = ["Developers", "Information Technology"]
+License = "OSI Approved :: MIT License"
+Programming_Language = "Python :: 3"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.entry-points."mkdocs.plugins"]
+langly = "src.plugin:Langly"
