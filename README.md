@@ -116,6 +116,8 @@ The text within the masking is then automatically translated by Langly.
 
 ## Changelog und Features
 
+### 0.1.2
+
 - As the algorithm uses the characters `{[` and `]}` as masking for translatable text, these characters cannot be documented directly in the text. Instead, `hints` are used, which are automatically converted to `{[` and `]}` after translation.
 - Markdown export on first run of `serve`, `build` or `gh-deploy` for specified pages and languages with defined path.
 - Change to pyproject.toml
