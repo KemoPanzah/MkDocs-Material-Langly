@@ -13,7 +13,7 @@ from markdown import markdown as md2html
 from pathlib import Path
 from markdownify import MarkdownConverter
 
-from .localizer import Localizer
+from localizer import Localizer
 
 index = """
 <!DOCTYPE html>
