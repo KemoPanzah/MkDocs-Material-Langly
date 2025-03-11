@@ -118,6 +118,10 @@ The text within the masking is then automatically translated by Langly.
 
 ## Changelog und Features
 
+### 0.1.3
+
+- Something is coming soon...
+
 ### 0.1.2
 
 - As the algorithm uses the characters `{[` and `]}` as masking for translatable text, these characters cannot be documented directly in the text. Instead, `hints` are used, which are automatically converted to `{[` and `]}` after translation.
